@@ -4,6 +4,7 @@
 		<title>Slopegraph.js</title>
 		<style type="text/css">
 		</style>
+		<script src="http://github.com/mbostock/d3/raw/master/d3.min.js"></script>
 		<script type="text/javascript">
 		var dataset=[[10, 100], [430, 441], [103, 89], [228, 62], [393, 258], [250, 167], [290, 322], [480, 17], [94, 27], [116, 163]]
 		var widthOfCanvas = '500';
@@ -24,6 +25,19 @@
 						chart(value[0], value[1]);
 					};
 				}
+				var vis = d3.select("#svgslopegraph").append("svg:svg")
+					.attr("width", widthOfCanvas)
+					.attr("height", heightOfCanvas);
+				vis.selectAll("line")
+					.data(dataset)
+					.enter()
+					.append("svg:line")
+					.style("stroke-width", 1)
+					.style("stroke", "#ccc")
+					.attr("y1", function (d) { return d[0]; })
+					.attr("y2", function (d) { return d[1]; })
+					.attr("x1", function (d) { return 0; })
+					.attr("x2", function (d) { return widthOfCanvas; });
 			}
 		</script>
 	</head>
@@ -31,5 +45,6 @@
 		<canvas id="slopegraph">
 			<p>Your browser doesn't support canvas. Firefox and Chrome do, though.</p>
 		</canvas>
+		<div id="svgslopegraph" style="position:absolute; top: 10px;left: 600px;"></div>
 	</body>
 </html>
