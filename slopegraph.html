@@ -21,8 +21,8 @@
 						context.lineTo(widthOfCanvas, rightValue);
 						context.stroke();
 					};
-					for each (var value in dataset) {
-						chart(value[0], value[1]);
+					for (var key in dataset) {
+						chart(dataset[key][0], dataset[key][1]);
 					};
 				}
 				var vis = d3.select("#svgslopegraph").append("svg:svg")
